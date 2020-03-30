@@ -1,12 +1,120 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
 <head>
-	<title></title>
-</head>
-<body>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<title>jQuery Mobile Web App</title>
+
+<link href="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" type="text/css" href="style.css">
+<script src="http://code.jquery.com/jquery-1.10.2.min.js" type="text/javascript"></script>
+<script src="http://code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js" type="text/javascript"></script>
+
+<link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
 
 
-	<h1>Hello World</h1>
+</head> 
+<body> 
+
+<div data-role="page" id="demo-page" data-url="demo-page">
+    <div data-role="header">
+        <p>VÄDER</p>
+        <a href="#left-panel" data-icon="bars" data-iconpos="notext" data-shadow="false" data-iconshadow="false">Menu</a>
+    </div><!-- /header -->
+    <div role="main" class="ui-content">
+        <div class="article">
+            
+		<span id="weather"></span>
+            
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.2/jquery.min.js"></script>
+	<script src="jquery.simpleWeather-2.3.min.js"></script>
+	<script>
+		$(function() {
+			var stad;
+			
+			function kalmar(){
+				stad = 894732;
+			}
+			function ronneby(){
+				stad = 902730;
+			}
+			
+			$.simpleWeather({
+				zipcode: '',
+				woeid:    '894732',
+				location: '',
+				unit: 'f',
+				success: function(weather) {
+					
+					html = '<p>Just nu <br />';
+					 html += ''+weather.city+'<br />';
+					
+					<!--  html = '<h3>'+weather.city+', '+weather.region+' '+weather.country+'</h3>'; -->
+				<!--	html += '<p><strong>Today\'s High</strong>: '+weather.high+'&deg; '+weather.units.temp+' - <strong>Today\'s Low</strong>: '+weather.low+'&deg; '+weather.units.temp+'</p>'; -->
+				
+	 				html += '' +weather.tempAlt+'&deg; C</p>'; 
+	 			<!--	html += '<p><strong>Condition Code</strong>: '+weather.code+'</p>';  -->
+	<!-- 				html += '<p><strong>Thumbnail</strong>: <img src="'+weather.thumbnail+'"></p>';  -->
+				<!--	html += '<p><strong>Wind</strong>: '+weather.wind.direction+' '+weather.wind.speed+' '+weather.units.speed+' <strong>Wind Chill</strong>: '+weather.wind.chill+'</p>';  -->
+  				<!--	html += '<p><strong>Currently</strong>: '+weather.currently+' - <strong>Forecast</strong>: '+weather.forecast+'</p>'; -->
+					<!-- html += '<p><img src="'+weather.image+'"></p>'; -->
+			
+		html += '<p><img src="images/'+weather.code+'.png"></p>';
+
+
+	<!-- 				html += '<p><strong>Humidity</strong>: '+weather.humidity+' <strong>Pressure</strong>: '+weather.pressure+' <strong>Rising</strong>: '+weather.rising+' <strong>Visibility</strong>: '+weather.visibility+'</p>';  -->
+	<!--				html += '<p><strong>Heat Index</strong>: '+weather.heatindex+'</p>'; -->
+	<!--				html += '<p><strong>Sunrise</strong>: '+weather.sunrise+' - <strong>Sunset</strong>: '+weather.sunset+'</p>'; -->
+	<!--				html += '<p><strong>Tomorrow\'s Date</strong>: '+weather.tomorrow.day+' '+weather.tomorrow.date+'<br /><strong>Tomorrow\'s High/Low</strong>: '+weather.tomorrow.high+'/'+weather.tomorrow.low+'<br /><strong>Tomorrow\'s Condition Code</strong>: '+weather.tomorrow.code+'<br /><strong>Tomorrow\'s Forecast</strong>: '+weather.tomorrow.forecast+'<br /> <strong>Tomorrow\'s Image</strong>: '+weather.tomorrow.image+'</p>'; -->
+			<!--		html += '<p><strong>Last updated</strong>: '+weather.updated+'</p>';  -->
+			<!--		html += '<p><a href="'+weather.link+'">View forecast at Yahoo! Weather</a></p>'; -->
+
+					$("#weather").html(html);
+				},
+				error: function(error) {
+					$("#weather").html('<p>'+error+'</p>');
+				}
+			});
+		});
+	</script>
+
+
+        </div><!-- /article -->
+    </div><!-- /content -->
+    
+    <div data-role="panel" id="left-panel">
+        <ul data-role="listview">
+            <li data-icon="delete"><a href="#" data-rel="close">Stäng menyn</a></li>
+            <li data-icon="back"><a href="" onClick="window.location.reload()">Uppdatera sidan</a></li>
+            <li data-icon="delete"><a onclick="kalmar()" href="#" data-rel="close">Kalmar</a></li>
+            <li data-icon="delete"><a onclick="ronneby()" href="#" data-rel="close">Ronneby</a></li>
+            <li data-icon="delete"><a onclick="eskilstuna()" href="#" data-rel="close">Eskilstuna</a></li>
+
+        </ul>
+    </div><!-- /panel -->
+   
+</div>
+
+
+
+<!--
+<div data-role="page" id="page">
+	<div data-role="header">
+		<h1>Page One</h1>
+	</div>
+	<div data-role="content">		
+		
+	</div>
+	<div data-role="footer">
+		   <div data-role="navbar">
+        <ul>
+            <li><a href="#" data-icon="grid" data-theme="a">A</a></li>
+            <li><a href="#" data-icon="star" data-theme="b">B</a></li>
+        </ul>
+    </div>
+	</div>
+</div> -->
+
 
 </body>
 </html>
